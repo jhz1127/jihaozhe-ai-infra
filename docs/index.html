@@ -1,16 +1,20 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="吉皓哲｜AI Infra、分布式训练与高性能数据系统"><meta property="og:image" content="og.png"><title>吉皓哲｜AI Infra 工程师</title><link rel="stylesheet" href="style.css"></head>
-<body><main class="page">
-  <header><div><h1>吉皓哲</h1><div class="target">AI Infrastructure · 分布式训练 · 高性能数据系统</div><div class="contact"><a href="mailto:hzji1127@foxmail.com">hzji1127@foxmail.com</a></div></div><a class="resume" href="吉皓哲-简历.pdf" download>下载 PDF 简历</a></header>
-  <section><h2>简介</h2><p class="summary">专注大模型训练数据链路、分布式通信与高性能系统工程。擅长从训练吞吐、长尾和资源利用率出发定位瓶颈，以可复现实验验证优化效果。</p></section>
-  <section><h2>核心技能</h2><div class="skills"><span>C++ / Python</span><span>PyTorch / DataLoader</span><span>RDMA / GPUDirect</span><span>分布式训练</span><span>CUDA VMM</span><span>ZeRO / FlashAttention</span><span>Linux 并发</span><span>性能诊断</span></div></section>
-  <section><h2>工作经历</h2><article class="entry"><time>2025 — 至今</time><div><h3>京东零售 · AI Infra 与大数据部</h3><div class="role">AI Infra 算法工程师</div><p>负责大模型训练样本引擎与数据链路优化，覆盖动态组批、断点续训、DataLoader 性能诊断和 RDMA 分离式数据供给。</p></div></article></section>
-  <section><h2>代表项目</h2>
-    <article class="project"><div class="project-head"><h3>分离式 DataLoader</h3><div class="result">31.1k → 41.1k samples/s（+32%）</div></div><div class="stack">PyTorch · Ray · RDMA · GPUDirect RDMA</div><ul><li>设计 M×N Producer/Consumer 架构，控制面与数据面分离，解决 PyTorch 单线程 pin_memory 瓶颈。</li><li>以 one-sided RDMA READ 与 GPUDirect RDMA 直进 GPU HBM，实现数据拉取与训练计算流水并行。</li></ul></article>
-    <article class="project"><div class="project-head"><h3>Token Budget Batching</h3><div class="result">Qwen3 4B：MFU 38.15% → 46.84%</div></div><div class="stack">PyTorch · Qwen3 · ZeRO-1 · BF16</div><ul><li>独立设计基于 token budget 的动态组批与向量化切分路径，消除变长序列造成的 step 拖尾。</li><li>在 B200 训练中，4B 模型 per-rank tokens/s 提升 22.8%。</li></ul></article>
-    <article class="project"><div class="project-head"><h3>OxygenTensor 跨节点 Tensor 通信</h3><div class="result">GPU HBM 直通 RDMA</div></div><div class="stack">Python · C++ · CUDA VMM · FatPtr</div><ul><li>参与存储管理与通信调度双引擎建设，理解 FatPtr、MetaService、TransferEngine 分层。</li><li>打通 GPUDirect RDMA、HBM staging 和 SHM 多路径，为分布式训练提供传输底座。</li></ul></article>
-    <article class="project"><div class="project-head"><h3>APS 高级计划与排程系统</h3><div class="result">94.7% 胜率 · 152/152 零违规</div></div><div class="stack">C++20 · MLCLSP · 多约束优化</div><ul><li>构建 Attributes/State 快照回滚模型和 Chain Tracking 天间 BOM 链推进算法，覆盖十余种工业约束。</li><li>144/152 算例优于 8 线程商用求解器，平均 Gap −32.4%，最长求解时间 &lt;150 秒。</li></ul></article>
-  </section>
-  <section><h2>教育背景</h2><div class="edu"><div><h3>华中科技大学（985）</h3><p>计算机技术 · 硕士 · 2023 — 2026</p></div><div><h3>西安电子科技大学（211）</h3><p>通信工程 · 本科 · 2019 — 2023</p></div></div></section>
-  <footer><span>吉皓哲 · AI Infrastructure Engineer</span><a href="mailto:hzji1127@foxmail.com">联系我</a></footer>
-</main></body></html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="吉皓哲｜AI Infra、分布式训练与高性能数据系统"><title>吉皓哲｜项目作品集</title><link rel="stylesheet" href="style.css"></head>
+<body><main class="page"><header><div><h1>吉皓哲</h1><div class="target">AI Infrastructure · 分布式训练 · 高性能数据系统</div><div class="contact"><a href="mailto:hzji1127@foxmail.com">hzji1127@foxmail.com</a></div></div><a class="resume" href="吉皓哲-简历.pdf" download>下载 PDF 简历</a></header>
+<section><h2>个人简介</h2><p class="summary">专注于大模型训练数据链路、分布式通信和高性能系统工程。熟悉 Python 训练栈、C++ 系统编程与 RDMA 通信；擅长从吞吐、长尾和资源利用率中定位问题，以可复现实验验证优化收益。</p></section>
+<section><h2>核心技能</h2><div class="skills"><span>C++ / Python</span><span>PyTorch / DataLoader</span><span>RDMA / GPUDirect</span><span>CUDA VMM</span><span>分布式训练</span><span>ZeRO / FlashAttention</span><span>Linux 并发</span><span>性能诊断</span></div></section>
+<section><h2>实习经历</h2><article class="entry"><time>2026.04 — 至今</time><div><h3>京东零售 · AI Infra 与大数据部</h3><div class="role">AI Infra 算法工程师（实习）· 数据引擎 / PyTorch / 分布式训练</div><p>负责 LLM 训练样本引擎和数据链路优化，覆盖动态组批、断点续训、DataLoader 性能诊断与 RDMA 分离式数据供给。</p></div></article></section>
+<section><h2>实习项目</h2><div class="project-list">
+<a class="project-link" href="projects/dynamic-batching.html"><span>01</span><div><h3>Token Budget Batching 动态组批</h3><p>Qwen3 4B：tokens/s +22.8%，MFU 38.15% → 46.84%</p></div><b>查看详情 →</b></a>
+<a class="project-link" href="projects/disaggregated-dataloader.html"><span>02</span><div><h3>分离式 DataLoader</h3><p>控制面 / 数据面分离，H100 samples/s +32%</p></div><b>查看详情 →</b></a>
+<a class="project-link" href="projects/oxygen-tensor.html"><span>03</span><div><h3>OxygenTensor 跨节点 Tensor 通信</h3><p>CUDA VMM + GPUDirect RDMA 多路径传输</p></div><b>查看详情 →</b></a>
+<a class="project-link" href="projects/pipeprobe.html"><span>04</span><div><h3>PipeProbe：DataLoader Pipeline 诊断</h3><p>零额外 IPC 的长尾性能定位</p></div><b>查看详情 →</b></a>
+</div></section>
+<section><h2>个人项目与竞赛</h2><div class="project-list">
+<a class="project-link" href="projects/aps.html"><span>05</span><div><h3>APS 高级计划与排程系统</h3><p>152/152 零违规，144/152 优于商用求解器</p></div><b>查看详情 →</b></a>
+<a class="project-link" href="projects/eda.html"><span>06</span><div><h3>EDA 精英挑战赛</h3><p>全国二等奖，算法较基线加速 10×+</p></div><b>查看详情 →</b></a>
+<a class="project-link" href="projects/network-server.html"><span>07</span><div><h3>高性能 C++ 分布式网络服务器</h3><p>Main-Sub Reactor、多线程与 RAII</p></div><b>查看详情 →</b></a>
+</div></section>
+<section><h2>教育背景</h2><div class="edu"><div><h3>华中科技大学（985）</h3><p>计算机技术 · 硕士 · 2024 — 2027</p></div><div><h3>西安电子科技大学（211）</h3><p>通信工程 · 本科 · 2019 — 2023</p></div></div></section>
+<section><h2>奖项</h2><div class="edu"><div><h3>2025 中国研究生创“芯”大赛 · EDA 精英挑战赛</h3><p>全国二等奖（队长 / 第一完成人）</p></div><div><h3>研究生学业奖学金</h3><p>2025—2026 一等奖 · 2024—2025 二等奖</p></div></div></section>
+<footer><span>吉皓哲 · AI Infrastructure Engineer</span><a href="mailto:hzji1127@foxmail.com">联系我</a></footer></main></body></html>

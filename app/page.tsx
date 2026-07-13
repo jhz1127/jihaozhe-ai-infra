@@ -96,7 +96,7 @@ export default function Home() {
         <div><p className="eyebrow">EXPERIENCE</p><h2>在真实系统里<br />解决真实问题。</h2></div>
         <div className="timeline">
           <article><p>2025 — 至今</p><div><h3>京东零售 · AI Infra 与大数据部</h3><h4>AI Infra 算法工程师</h4><p>负责大模型训练样本引擎与数据链路优化，覆盖动态组批、断点续训、DataLoader 性能诊断及 RDMA 分离式数据供给。</p></div></article>
-          <article><p>2023 — 2026</p><div><h3>华中科技大学（985）</h3><h4>计算机技术 · 硕士</h4><p>聚焦高性能计算、分布式系统与工程优化。</p></div></article>
+          <article><p>2024 — 2027</p><div><h3>华中科技大学（985）</h3><h4>计算机技术 · 硕士</h4><p>聚焦高性能计算、分布式系统与工程优化。</p></div></article>
           <article><p>2019 — 2023</p><div><h3>西安电子科技大学（211）</h3><h4>通信工程 · 本科</h4><p>夯实系统、通信与软件工程基础。</p></div></article>
         </div>
       </section>
