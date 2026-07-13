@@ -1,19 +1,19 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="吉皓哲｜AI Infra、分布式训练与高性能数据系统"><title>吉皓哲｜项目作品集</title><link rel="stylesheet" href="style.css"></head>
-<body><main class="page"><header><div><h1>吉皓哲</h1><div class="target">AI Infrastructure · 分布式训练 · 高性能数据系统</div><div class="contact"><a href="mailto:hzji1127@foxmail.com">hzji1127@foxmail.com</a></div></div><a class="resume" href="吉皓哲-简历.pdf" download>下载 PDF 简历</a></header>
-<section><h2>个人简介</h2><p class="summary">专注于大模型训练数据链路、分布式通信和高性能系统工程。熟悉 Python 训练栈、C++ 系统编程与 RDMA 通信；擅长从吞吐、长尾和资源利用率中定位问题，以可复现实验验证优化收益。</p></section>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="吉皓哲｜搜索推荐训练、分布式数据系统与高性能工程"><title>吉皓哲｜项目作品集</title><link rel="stylesheet" href="style.css"></head>
+<body><main class="page"><header><div><h1>吉皓哲</h1><div class="target">搜索与推荐训练 · 分布式数据系统 · 高性能工程</div><div class="contact"><a href="mailto:hzji1127@foxmail.com">hzji1127@foxmail.com</a></div></div><a class="resume" href="吉皓哲-简历.pdf" download>下载 PDF 简历</a></header>
+<section><h2>个人简介</h2><p class="summary">专注于搜索与推荐训练的数据链路、分布式通信和高性能系统工程。熟悉 Python 训练栈、C++ 系统编程与 RDMA 通信；擅长从吞吐、长尾和资源利用率中定位问题，以可复现实验验证优化收益。</p></section>
 <section><h2>核心技能</h2><div class="skills"><span>C++ / Python</span><span>PyTorch / DataLoader</span><span>RDMA / GPUDirect</span><span>CUDA VMM</span><span>分布式训练</span><span>ZeRO / FlashAttention</span><span>Linux 并发</span><span>性能诊断</span></div></section>
-<section><h2>实习经历</h2><article class="entry"><time>2026.04 — 至今</time><div><h3>京东零售 · AI Infra 与大数据部</h3><div class="role">AI Infra 算法工程师（实习）· 数据引擎 / PyTorch / 分布式训练</div><p>负责 LLM 训练样本引擎和数据链路优化，覆盖动态组批、断点续训、DataLoader 性能诊断与 RDMA 分离式数据供给。</p></div></article></section>
+<section><h2>实习经历</h2><article class="entry"><time>2026.04 — 至今</time><div><h3>京东零售 · AI Infra 与大数据部</h3><div class="role">AI Infra 算法工程师（实习）· 数据引擎 / PyTorch / 分布式训练</div><p>负责搜索与推荐训练样本引擎和数据链路优化，覆盖动态组批、断点续训、DataLoader 性能诊断与 RDMA 分离式数据供给。</p></div></article></section>
 <section><h2>实习项目</h2><div class="project-list">
-<a class="project-link" href="projects/dynamic-batching.html"><span>01</span><div><h3>Token Budget Batching 动态组批</h3><p>Qwen3 4B：tokens/s +22.8%，MFU 38.15% → 46.84%</p></div><b>查看详情 →</b></a>
-<a class="project-link" href="projects/disaggregated-dataloader.html"><span>02</span><div><h3>分离式 DataLoader</h3><p>控制面 / 数据面分离，H100 samples/s +32%</p></div><b>查看详情 →</b></a>
-<a class="project-link" href="projects/oxygen-tensor.html"><span>03</span><div><h3>OxygenTensor 跨节点 Tensor 通信</h3><p>CUDA VMM + GPUDirect RDMA 多路径传输</p></div><b>查看详情 →</b></a>
-<a class="project-link" href="projects/pipeprobe.html"><span>04</span><div><h3>PipeProbe：DataLoader Pipeline 诊断</h3><p>零额外 IPC 的长尾性能定位</p></div><b>查看详情 →</b></a>
+<a class="project-link" href="projects/dynamic-batching.html"><span>01</span><div><h3>Token Budget Batching 动态组批</h3><p>面向生成式搜推训练中的变长行为序列，独立实现 token 预算组批与向量化切分，让每个训练 step 的计算量保持稳定；在 Qwen3 验证任务上，4B 模型 tokens/s 提升 22.8%、MFU 提升至 46.84%。</p></div><b>查看详情 →</b></a>
+<a class="project-link" href="projects/disaggregated-dataloader.html"><span>02</span><div><h3>分离式 DataLoader</h3><p>为高吞吐推荐召回训练设计 M×N Producer/Consumer 架构，将调度控制面与 RDMA 数据面拆开，解决单线程 pin_memory 和 shard 不均问题；H100 单卡样本吞吐由 31.1k 提升到 41.1k。</p></div><b>查看详情 →</b></a>
+<a class="project-link" href="projects/oxygen-tensor.html"><span>03</span><div><h3>OxygenTensor 跨节点 Tensor 通信</h3><p>参与搜推训练场景下的 Tensor 存储管理与通信调度建设，梳理 FatPtr、MetaService、TransferEngine 分层，并打通 CUDA VMM、GPUDirect RDMA、HBM staging 与 SHM 多路径。</p></div><b>查看详情 →</b></a>
+<a class="project-link" href="projects/pipeprobe.html"><span>04</span><div><h3>PipeProbe：DataLoader Pipeline 诊断</h3><p>针对推荐训练 read、parse、特征处理和 collate 链路难以定位瓶颈的问题，让诊断信息随真实 batch 在原生队列中回流，以零额外 IPC 采集生产、排队与消费三段长尾数据。</p></div><b>查看详情 →</b></a>
 </div></section>
 <section><h2>个人项目与竞赛</h2><div class="project-list">
-<a class="project-link" href="projects/aps.html"><span>05</span><div><h3>APS 高级计划与排程系统</h3><p>152/152 零违规，144/152 优于商用求解器</p></div><b>查看详情 →</b></a>
-<a class="project-link" href="projects/eda.html"><span>06</span><div><h3>EDA 精英挑战赛</h3><p>全国二等奖，算法较基线加速 10×+</p></div><b>查看详情 →</b></a>
-<a class="project-link" href="projects/network-server.html"><span>07</span><div><h3>高性能 C++ 分布式网络服务器</h3><p>Main-Sub Reactor、多线程与 RAII</p></div><b>查看详情 →</b></a>
+<a class="project-link" href="projects/aps.html"><span>05</span><div><h3>APS 高级计划与排程系统</h3><p>面向 MLCLSP 多级生产批量计划，将机器、模具、BOM 和班次等十余种约束纳入启发式求解；通过 Attributes/State 分离、FlatSet 与 Chain Tracking，在 152 个算例中全部零违规。</p></div><b>查看详情 →</b></a>
+<a class="project-link" href="projects/eda.html"><span>06</span><div><h3>EDA 精英挑战赛</h3><p>针对海量版图匹配的 O(N²) 计算，结合算法剪枝、OpenMP 动态调度与 NEON SIMD 向量化压缩端到端耗时；作为队长/第一完成人获全国二等奖，算法较基线加速 10 倍以上。</p></div><b>查看详情 →</b></a>
+<a class="project-link" href="projects/network-server.html"><span>07</span><div><h3>高性能 C++ 分布式网络服务器</h3><p>独立实现基于 One Loop Per Thread 的 Main-Sub Reactor 服务端框架，封装事件循环、连接管理与 Buffer，并以 RAII 和智能指针解决跨线程回调的资源生命周期问题。</p></div><b>查看详情 →</b></a>
 </div></section>
 <section><h2>教育背景</h2><div class="edu"><div><h3>华中科技大学（985）</h3><p>计算机技术 · 硕士 · 2024 — 2027</p></div><div><h3>西安电子科技大学（211）</h3><p>通信工程 · 本科 · 2019 — 2023</p></div></div></section>
 <section><h2>奖项</h2><div class="edu"><div><h3>2025 中国研究生创“芯”大赛 · EDA 精英挑战赛</h3><p>全国二等奖（队长 / 第一完成人）</p></div><div><h3>研究生学业奖学金</h3><p>2025—2026 一等奖 · 2024—2025 二等奖</p></div></div></section>

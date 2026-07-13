@@ -54,7 +54,7 @@ export default function Home() {
         <div className="hero-copy">
           <p className="eyebrow">AI INFRASTRUCTURE ENGINEER · 2026</p>
           <h1>让训练系统<br />更快地<span>流动。</span></h1>
-          <p className="intro">吉皓哲，专注于大模型训练数据链路、分布式通信与高性能系统工程。从 GPU 数据供给到跨节点 Tensor 传输，把复杂的性能问题变成可验证的结果。</p>
+          <p className="intro">吉皓哲，专注于搜索与推荐训练的数据链路、分布式通信与高性能系统工程。从 GPU 数据供给到跨节点 Tensor 传输，把复杂的性能问题变成可验证的结果。</p>
           <div className="hero-actions">
             <a className="button primary" href="#projects">查看代表项目 <span>↘</span></a>
             <a className="button text" href="mailto:hzji1127@foxmail.com">联系我 <span>↗</span></a>
@@ -95,7 +95,7 @@ export default function Home() {
       <section className="experience section" id="experience">
         <div><p className="eyebrow">EXPERIENCE</p><h2>在真实系统里<br />解决真实问题。</h2></div>
         <div className="timeline">
-          <article><p>2025 — 至今</p><div><h3>京东零售 · AI Infra 与大数据部</h3><h4>AI Infra 算法工程师</h4><p>负责大模型训练样本引擎与数据链路优化，覆盖动态组批、断点续训、DataLoader 性能诊断及 RDMA 分离式数据供给。</p></div></article>
+          <article><p>2026.04 — 至今</p><div><h3>京东零售 · AI Infra 与大数据部</h3><h4>AI Infra 算法工程师（实习）</h4><p>负责搜索与推荐训练样本引擎与数据链路优化，覆盖动态组批、断点续训、DataLoader 性能诊断及 RDMA 分离式数据供给。</p></div></article>
           <article><p>2024 — 2027</p><div><h3>华中科技大学（985）</h3><h4>计算机技术 · 硕士</h4><p>聚焦高性能计算、分布式系统与工程优化。</p></div></article>
           <article><p>2019 — 2023</p><div><h3>西安电子科技大学（211）</h3><h4>通信工程 · 本科</h4><p>夯实系统、通信与软件工程基础。</p></div></article>
         </div>
