@@ -1,1 +1,19 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>APS 排程系统｜吉皓哲</title><link rel="stylesheet" href="../style.css"></head><body><main class="page detail-page"><a class="back" href="../index.html">← 返回项目目录</a><div class="detail-title"><h1>APS 高级计划与排程系统（校企合作）</h1><p>面向多级生产批量计划的多约束组合优化系统。</p><div class="detail-meta">个人项目 · 核心开发者 · C++20 / CMake / MLCLSP / 启发式算法</div></div><section><h2>问题</h2><p>多级生产批量计划（MLCLSP，NP-Hard）需同时处理机器产能、模具组合、BOM 层级、批次生命周期、班次成本与替代规则等十余种约束。商用求解器在多数算例上难以在实际时间预算内获得高质量可行解。</p></section><section><h2>架构图</h2><div class="architecture flow"><div class="node-box"><strong>输入建模</strong><p>订单、BOM、机器、模具与规则</p></div><div class="arrow">→</div><div class="node-box"><strong>求解策略</strong><p>FlatSet、两轮调度、Chain Tracking、滚动重排</p></div><div class="arrow">→</div><div class="node-box"><strong>排程结果</strong><p>约束校验、快照回滚、增量更新</p></div></div></section><section><h2>关键设计</h2><ul><li><strong>Attributes / State 分离：</strong>将不变输入与可变排程状态拆开，支持全状态快照、增量修改与违规回滚。</li><li><strong>FlatSet 模具匹配：</strong>以产品特征为 key 直接索引兼容模具，将高频 O(n) 遍历改为近似 O(1) 查找。</li><li><strong>Chain Tracking：</strong>跨天追踪深层 BOM 依赖链，确保子部件先于父部件排产；配合滚动窗口处理新订单插入。</li></ul></section><section><h2>量化结果</h2><div class="result-grid"><div><strong>152 / 152</strong><span>全场景算例零违规</span></div><div><strong>94.7%</strong><span>相对 8 线程商用求解器胜率</span></div><div><strong>&lt;150s</strong><span>最长求解时间，平均 Gap −32.4%</span></div></div></section></main></body></html>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>APS 排程系统｜吉皓哲</title><link rel="stylesheet" href="../style.css"></head><body><main class="page detail-page"><a class="back" href="../index.html">← 返回项目目录</a><div class="detail-title"><h1>APS 智能排程系统</h1><p>以领域约束建模和启发式搜索解决多层 BOM、模具与产能约束下的复杂排程问题。</p><div class="detail-meta">个人项目 / 竞赛 · C++20 / 组合优化 / MLCLSP</div></div><section><h2>问题与目标</h2><p>工业订单同时受到产品交期、设备产能、模具替代、班次和多层 BOM 依赖限制。通用求解器难以直接表达业务规则，且订单动态插入时重算代价高。我构建了可回滚的状态模型与分阶段启发式算法，在保证约束零违规的前提下追求更好的生产目标。</p></section><section><h2>求解架构</h2><pre class="mermaid">graph TD
+  subgraph Input["输入层"]
+    O["订单：产品 / 数量 / 交期"] --> M["机器产能 + 模具约束"]
+    BOM["BOM 层级结构"] --> M
+    R["班次 / 替代规则 / 批次生命周期"] --> M
+  end
+  subgraph Model["建模层 · C++20"]
+    M --> AS["Attributes / State 分离&lt;br/&gt;Attr：机器、BOM、规则&lt;br/&gt;State：当天排程结果&lt;br/&gt;支持快照与增量回滚"]
+  end
+  subgraph Solve["求解层"]
+    AS --> P1["第一轮：FlatSet 模具匹配&lt;br/&gt;O(1) 哈希替代遍历"]
+    P1 --> P2["第二轮：多模板优先级&lt;br/&gt;配对生产"]
+    P2 --> CT["Chain Tracking&lt;br/&gt;天间 BOM 链推进"]
+    CT --> RW["滚动窗口渐进式重排&lt;br/&gt;动态插入新订单"]
+  end
+  subgraph Output["输出"]
+    RW --> R1["152 / 152 算例零违规"]
+    RW --> R2["144 / 152 优于商用求解器&lt;br/&gt;全局胜率 94.7%"]
+  end</pre><p class="diagram-caption">静态规则、可变排程状态与启发式求解解耦，支持在局部变更后快速回滚和重排。</p></section><section><h2>关键设计</h2><ul><li><strong>Attributes / State 分离：</strong>不变约束与每天的排程结果分开保存，使候选方案可以全状态快照、增量修改和安全回滚。</li><li><strong>领域剪枝：</strong>用 FlatSet 加速模具匹配，用替代规则和生命周期先排除不可能的候选，减少搜索空间。</li><li><strong>Chain Tracking：</strong>显式追踪跨天 BOM 链，避免深层物料依赖在局部排程中被遗漏。</li><li><strong>滚动窗口：</strong>面对新订单，不从零求解；在有限窗口内渐进重排，兼顾响应速度与方案质量。</li></ul></section><section><h2>验证结果</h2><div class="result-grid"><div><strong>152 / 152</strong><span>算例零违规</span></div><div><strong>144 / 152</strong><span>优于商用求解器</span></div><div><strong>94.7%</strong><span>全局胜率</span></div></div><p>在全部基准算例上保持约束可行，并取得平均 Gap −32.4% 的优化表现。</p></section></main><script type="module" src="mermaid-init.js"></script></body></html>

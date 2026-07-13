@@ -1,1 +1,17 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OxygenTensor 通信框架｜吉皓哲</title><link rel="stylesheet" href="../style.css"></head><body><main class="page detail-page"><a class="back" href="../index.html">← 返回项目目录</a><div class="detail-title"><h1>OxygenTensor 跨节点 Tensor 通信框架</h1><p>存储管理与通信调度双引擎，为搜推训练提供跨节点 Tensor 传输底座。</p><div class="detail-meta">京东实习项目 · Python / C++ / CUDA VMM / GPUDirect RDMA</div></div><section><h2>项目背景</h2><p>大规模搜推训练需要高频跨节点 Tensor 传输。通用 CPU staging 路径会增加拷贝和同步成本，难以充分利用 NIC 与 GPU 的高速数据通路。</p></section><section><h2>架构图</h2><div class="architecture"><div class="node-box"><strong>FatPtr / MetaService</strong><p>远程 Tensor 句柄与元数据寻址</p></div><div class="node-box"><strong>TransferEngine</strong><p>Mooncake / SDMA 后端抽象与调度</p></div><div class="node-box"><strong>传输路径</strong><p>GPUDirect RDMA、HBM staging、SHM</p></div></div></section><section><h2>工作内容</h2><ul><li>参与分析 FatPtr、MetaService、TransferEngine 分层，理解存储管理和通信调度的职责边界。</li><li>打通 CUDA VMM 的 GPU 虚拟内存映射到 RDMA 可访问物理显存的路径。</li><li>梳理并验证 GPUDirect RDMA、HBM staging、SHM 多路径，支持不同拓扑下的可靠传输。</li></ul></section><section><h2>工程价值</h2><p>该框架将远程 Tensor 的句柄、寻址和数据传输解耦，减少 CPU 参与的数据拷贝，为搜推训练提供高吞吐、可扩展的跨节点通信基础能力。</p></section></main></body></html>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OxygenTensor 通信底座｜吉皓哲</title><link rel="stylesheet" href="../style.css"></head><body><main class="page detail-page"><a class="back" href="../index.html">← 返回项目目录</a><div class="detail-title"><h1>OxygenTensor 通信底座</h1><p>以统一的远程 Tensor 句柄和多后端路径选择，为搜推训练提供跨进程、跨节点的数据传输能力。</p><div class="detail-meta">京东实习项目 · C++ / CUDA VMM / RDMA / SHM</div></div><section><h2>背景与职责</h2><p>分布式训练中的 Tensor 需要在不同进程、GPU 与节点间流动，但不同硬件拓扑适合不同路径。项目希望让上层只面对逻辑 Tensor，把内存位置、注册信息、传输通道和资源回收收敛到基础设施中。我参与存储管理与通信调度的实现与排障，重点覆盖 GPU 内存映射和 RDMA 直通链路。</p></section><section><h2>分层架构</h2><pre class="mermaid">graph TD
+  subgraph API["Python 层"]
+    T["逻辑 Tensor"] --> FL["from_local / to_local&lt;br/&gt;cat / free / wait_for_memory"]
+  end
+  subgraph Engine["C++ 引擎层"]
+    MS["MetaService&lt;br/&gt;全局元数据管理&lt;br/&gt;Tensor 注册与发现"] --> TE["TransferEngine::Copy&lt;br/&gt;路径选择与调度"]
+    GA["GlobalAllocator&lt;br/&gt;全局内存分配"] --> FP["FatPtr = addr / rkey / offset / len&lt;br/&gt;远程内存统一句柄"]
+  end
+  subgraph Backend["多后端传输层"]
+    TE --> R1["GPUDirect RDMA&lt;br/&gt;CUDA VMM 映射"]
+    TE --> R2["NVLink-P2P&lt;br/&gt;同机跨卡直通"]
+    TE --> R3["SHM&lt;br/&gt;同机共享内存"]
+    TE --> R4["SDMA&lt;br/&gt;NPU 直连通道"]
+  end
+  FP -.-> R1
+  FP -.-> R3
+  API --> Engine</pre><p class="diagram-caption">上层 API 不感知物理位置；TransferEngine 根据 FatPtr 和拓扑选择实际传输通路。</p></section><section><h2>关键实现与取舍</h2><ul><li><strong>FatPtr：</strong>将地址、rkey、偏移和长度封装为远程句柄，统一本地与远端内存的描述方式。</li><li><strong>CUDA VMM + GPUDirect：</strong>通过虚拟地址映射、内存注册与 NIC DMA，使网络可以直接访问 GPU HBM，减少 CPU staging。</li><li><strong>路径降级：</strong>优先选择 RDMA / P2P；面对物理页不连续、能力不匹配等条件时回退至 SHM，保证正确性优先。</li><li><strong>排障顺序：</strong>按 MR 注册、QP 建连、CQ 完成事件逐层定位，避免把链路问题误判成上层 Tensor 生命周期问题。</li></ul></section><section><h2>工程价值</h2><div class="result-grid"><div><strong>统一句柄</strong><span>跨进程、跨节点定位</span></div><div><strong>多路径</strong><span>按拓扑自动选择</span></div><div><strong>HBM 直通</strong><span>减少中间拷贝</span></div></div><p>该底座将复杂的内存与通信细节收敛到系统层，为数据供给、训练并行和后续硬件适配提供复用能力。</p></section></main><script type="module" src="mermaid-init.js"></script></body></html>

@@ -11,7 +11,7 @@ const projects = [
     number: "02",
     title: "Token Budget Batching",
     subtitle: "以 token 而非样本数均衡计算",
-    tags: ["Qwen3", "ZeRO-1", "BF16", "FlashAttention"],
+    tags: ["Qwen3", "BF16", "动态组批"],
     result: "4B 模型 MFU 46.84%",
     detail: "独立实现基于 token budget 的动态组批与向量化切分路径，消除变长序列带来的 step 拖尾，在 B200 上显著提升训练吞吐。",
   },
@@ -34,7 +34,7 @@ const projects = [
 ];
 
 const skills = [
-  "C++ / Python", "PyTorch / DataLoader", "RDMA / GPUDirect", "分布式训练", "CUDA VMM", "Linux 并发", "ZeRO / FlashAttention", "性能诊断",
+  "C++ / Python", "PyTorch / DataLoader", "RDMA / GPUDirect", "分布式训练", "CUDA VMM", "Linux 并发", "性能诊断",
 ];
 
 export default function Home() {
