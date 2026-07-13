@@ -41,7 +41,7 @@ export default function Home() {
   return (
     <main>
       <nav className="nav" aria-label="主导航">
-        <a className="brand" href="#top">JHZ<span>.</span></a>
+        <a className="brand" href="#top">吉皓哲</a>
         <div className="nav-links">
           <a href="#projects">代表项目</a>
           <a href="#experience">经历</a>
@@ -106,7 +106,7 @@ export default function Home() {
         <div className="skill-list">{skills.map((skill, index) => <div key={skill}><span>0{index + 1}</span>{skill}</div>)}</div>
       </section>
 
-      <footer><div><a className="brand" href="#top">JHZ<span>.</span></a><p>AI Infrastructure · 分布式训练 · 高性能数据系统</p></div><div className="footer-contact"><a href="mailto:hzji1127@foxmail.com">hzji1127@foxmail.com</a><a href="tel:17795726649">177 9572 6649</a></div></footer>
+      <footer><div><a className="brand" href="#top">吉皓哲</a><p>AI Infrastructure · 分布式训练 · 高性能数据系统</p></div><div className="footer-contact"><a href="mailto:hzji1127@foxmail.com">hzji1127@foxmail.com</a></div></footer>
     </main>
   );
 }
